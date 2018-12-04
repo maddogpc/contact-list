@@ -1,13 +1,17 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
-
 class ContactCard extends React.Component{
     constructor(){
         super();
         this.state = {
             // initialize your state
         };
+    }
+    
+    handleClick(email) {
+        let url = '/edit/'+this.props.email;
+        this.props.history.push(url);
     }
     
     render(){
@@ -19,19 +23,19 @@ class ContactCard extends React.Component{
                     </div>
                     <div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
                         <div className=" float-right">
-                            <button className="btn" onClick={() => this.props.history.push('/edit')}><i className="fas fa-pencil-alt mr-3"></i></button>
-                            <button className="btn" onClick={() => this.props.onDelete()}><i className="fas fa-trash-alt"></i></button>
+                            <button className="btn edit" onClick={(email) => this.handleClick(this.props.email)} ><i className="fas fa-pencil-alt mr-3"></i></button>
+                            <button onClick={(email) => this.props.onClickTrash(this.props.email)} className="btn trash"><i className="fas fa-trash-alt"></i></button>
                         </div>
-                        <label className="name lead">Mike Anamendolla</label>
+                        <label className="name lead">{this.props.name}</label>
                         <br /> 
                         <i className="fas fa-map-marker-alt text-muted mr-3"></i>
-                        <span className="text-muted">5842 Hillcrest Rd</span>
+                        <span className="text-muted">{this.props.address}</span>
                         <br />
-                        <span className="fa fa-phone fa-fw text-muted mr-3" data-toggle="tooltip" title="" data-original-title="(870) 288-4149"></span>
-                        <span className="text-muted small">(870) 288-4149</span>
+                        <span className="fa fa-phone fa-fw text-muted mr-3" data-toggle="tooltip" title="" data-original-title={this.props.phone}></span>
+                        <span className="text-muted small">{this.props.phone}</span>
                         <br />
                         <span className="fa fa-envelope fa-fw text-muted mr-3" data-toggle="tooltip" data-original-title="" title=""></span>
-                        <span className="text-muted small text-truncate">mike.ana@example.com</span>
+                        <span className="text-muted small text-truncate">{this.props.email}</span>
                     </div>
                 </div>
             </li>
@@ -45,8 +49,12 @@ class ContactCard extends React.Component{
  * your component propersties
 **/
 ContactCard.propTypes = {
+    name: PropTypes.string,
+    address: PropTypes.string,
+    phone: PropTypes.string,
+    email: PropTypes.string,
     history: PropTypes.object,
-    onDelete: PropTypes.func,
+    onClickTrash: PropTypes.func
 };
 
 /**

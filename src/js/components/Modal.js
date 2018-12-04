@@ -8,10 +8,12 @@ class Modal extends React.Component{
         this.state = {
             // here is where you have to initialize your state with the
             // data that you need
+            
         };
     }
     
     render(){
+        
         return (
             <div className="modal" tabIndex="-1" role="dialog" style={{display: (this.props.show) ? 'inline-block' : 'none'}}>
                 <div className="modal-dialog" role="document">
@@ -29,8 +31,8 @@ class Modal extends React.Component{
                             <p>If you delete this thing the entire universe will go down!</p>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-primary">Oh no!</button>
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Yes baby!</button>
+                            <button onClick={() => this.props.onClose()} type="button" className="btn btn-primary">Oh no!</button>
+                            <button onClick={() => this.props.onClickTrashYes()} type="button" className="btn btn-secondary" data-dismiss="modal">Yes baby!</button>
                         </div>
                     </div>
                 </div>
@@ -45,6 +47,7 @@ class Modal extends React.Component{
 **/
 Modal.propTypes = {
     history: PropTypes.object,
+    onClickTrashYes: PropTypes.func,
     onClose: PropTypes.func,
     show: PropTypes.bool
 };
